@@ -8,21 +8,34 @@
 	<title></title>
 </head>
 <body ng-app="redNg">
-<div class="col-xs-12" style="height:150px;"></div>
+
+<div class="col-xs-12" style="height:100px; background-color: purple;"></div>
+
 <div class="container">
 	<div class="row">
 	  <div class="col-lg-6 col-md-offset-3">
-	  	<div class="newPost">
-	  	<div class="well well-sm"><i class="fa fa-thumbs-up" aria-hidden="true"></i>3 hardcoded post</div>
-	  	<div class="well well-sm"><i class="fa fa-thumbs-up" aria-hidden="true"></i>5 hardcoded post</div>
-	  	</div>
-	  <h3><span class="label label-default">Add your post here :P</span></h3>
-	    <div class="input-group">
-	      <input type="text" class="form-control" placeholder="Your new post here!">
-	      <span class="input-group-btn">
-	        <button class="btn btn-primary" type="button">Post</button>
-	      </span>
+
+	  	<h3><span class="label label-default">Add your post here <i class="fa fa-hand-spock-o" aria-hidden="true"></i></span></h3>
+
+	    <div ng-controller="postCtrl">
+
+		    <div ng-repeat="post in postObj | orderBy: '-like' track by $index" ng-init="post.like" class="postList">
+		    	<div class="well well-sm">
+		    	<button type="submit" value="show" ng-click="post.like = post.like+1" class="btn"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
+		  		{{post.like}} {{post.postText}}
+		  		</div>
+		  	</div>
+	  		
+	  		<div class="input-group">
+			     <input type="text" ng-model="newPost" class="form-control" placeholder="Your new post here!">
+			     <span class="input-group-btn">
+			     	<button class="btn btn-primary" type="submit" value="show" ng-click="showTwoWay()">Post</button>
+			     </span>
+
+	      	</div>
+
 	    </div>
+
 	  </div>
 	</div>
 </div>

@@ -1,10 +1,20 @@
 var app = angular.module("redNg", []);
 
-app.controller('app1', function ($scope) {
-	
+
+app.factory('postService', function () {
+	var postObj = [];
+	return {postObj:postObj};
 });
 
-app.factory('nameService', function () {
-	var personObj = [];
-	return {personObj:personObj}
+
+app.controller('postCtrl', function ($scope,postService) {
+	$scope.postObj = postService.postObj;
+
+	$scope.showTwoWay = function () {
+		$scope.postObj.push({postText:$scope.newPost});
+		$scope.newPost = "";
+	};
+
+
 });
+
